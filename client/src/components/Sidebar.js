@@ -18,7 +18,7 @@ export default function Sidebar({ id }) {
   }
 
   return (
-    <div style={{ width: "250px" }} className="d-flex flex-column">
+    <div style={{maxWidth:"250px"}} className="d-flex flex-column">
       <Tab.Container activeKey={activeKey} onSelect={setActiveKey}>
         <Nav
           variant="tabs"
@@ -28,16 +28,17 @@ export default function Sidebar({ id }) {
           <Nav.Item>
             <Nav.Link eventKey={CONVERSATIOINS_KEY}>Conversations</Nav.Link>
           </Nav.Item>
-
           <Nav.Item>
             <Nav.Link eventKey={CONTACTS_KEY}>Contacts</Nav.Link>
           </Nav.Item>
         </Nav>
-        <Tab.Content className="border-right d-flex overflow-auto flex-grow-1">
+        <Tab.Content className="border-right-0 d-flex overflow-hidden flex-grow-1">
           <Tab.Pane eventKey={CONVERSATIOINS_KEY}>
+            <div style={{marginTop:"2vh"}}></div>
             <Conversations />
           </Tab.Pane>
           <Tab.Pane eventKey={CONTACTS_KEY}>
+          <div style={{marginTop:"2vh"}}></div>
             <Contacts />
           </Tab.Pane>
         </Tab.Content>

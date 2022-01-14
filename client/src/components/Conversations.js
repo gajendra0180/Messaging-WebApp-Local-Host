@@ -6,7 +6,7 @@ export default function Conversations() {
   const { conversations, selectConversationIndex } = useConversations();
 
   return (
-    <ListGroup variant="flush">
+    <ListGroup variant="flush" style={{ width: "100vw"}}>
       {conversations.map((conversation, index) => (
         <ListGroup.Item
           key={index}
