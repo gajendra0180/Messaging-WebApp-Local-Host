@@ -7,7 +7,10 @@ export default function Dashboard({ id }) {
   const { selectedConversation } = useConversations();
 
   return (
-    <div className="d-flex" style={{ height: "100vh" }}>
+    <div
+      className="d-flex p-2"
+      style={{ height: "100vh", backgroundColor: "rgb(29, 26, 26)" }}
+    >
       <Sidebar id={id} />
       {selectedConversation && <OpenConversation />}
     </div>

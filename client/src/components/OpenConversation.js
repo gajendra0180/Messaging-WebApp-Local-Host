@@ -1,14 +1,19 @@
 import React, { useState, useCallback } from "react";
-import { Form, InputGroup, Button } from "react-bootstrap";
+import { Form, InputGroup, Button, Nav } from "react-bootstrap";
 import { useConversations } from "../contexts/ConversationsProvider";
 import "./OpenConversation.css";
 
 export default function OpenConversation() {
   const [text, setText] = useState("");
   const setRef = useCallback((node) => {
-    if (node) node.scrollIntoView({ smooth: true });
+    if (node) {
+      node.scrollIntoView({ smooth: true });
+      node.focus()
+    }
   }, []);
   const { sendMessage, selectedConversation } = useConversations();
+
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -20,9 +25,14 @@ export default function OpenConversation() {
     setText("");
   }
 
+  // ededed
   return (
     <div className="chat_area">
       <div className="d-flex flex-column flex-grow-1">
+        <div className="d-flex p-2 px-4  text-white" style={{ backgroundColor: "#2a2f32" }}>
+          <div className="rounded-circle mx-3 p-3" style={{ backgroundColor: "white" }}></div>
+          <div className="my-1">{selectedConversation.recipients.map((e) => (e.name)).join(",")}</div>
+        </div>
         <div className="flex-grow-1 overflow-auto">
           <div className="d-flex px-4 flex-column align-items-start justify-content-end px-3">
             {selectedConversation.messages.map((message, index) => {
@@ -33,13 +43,16 @@ export default function OpenConversation() {
                   key={index}
                   ref={lastMessage ? setRef : null}
                   className={`my-1 d-flex flex-column ${message.fromMe
-                      ? "align-self-end align-items-end"
-                      : "align-items-start"
+                    ? "align-self-end align-items-end"
+                    : "align-items-start"
                     }`}
                 >
                   <div
                     className="rounded px-2 py-1 rounded"
-                    style={{ backgroundColor: `${message.fromMe ? "#dcf8c6" : "white"}` }}
+                    style={{
+                      backgroundColor: `${message.fromMe ? "#dcf8c6" : "white"
+                        }`,
+                    }}
                   >
                     {message.text}
                   </div>
@@ -56,8 +69,8 @@ export default function OpenConversation() {
         </div>
         <Form onSubmit={handleSubmit}>
           <Form.Group
-            className="m-2 p-2"
-            style={{ backgroundColor: "#f5efef" }}
+            className="p-2"
+            style={{ backgroundColor: "#ddd8d8" }}
           >
             <InputGroup>
               <Form.Control
@@ -65,6 +78,7 @@ export default function OpenConversation() {
                 placeholder="Type a message"
                 required
                 value={text}
+                autofocus="autofocus"
                 onChange={(e) => setText(e.target.value)}
                 style={{
                   height: "30px",
@@ -73,7 +87,7 @@ export default function OpenConversation() {
                   border: "1px solid #fff",
                 }}
               />
-              <Button type="submit">Send</Button>
+              <Button className="bg-success mx-2 rounded-top" type="submit">Send</Button>
             </InputGroup>
           </Form.Group>
         </Form>

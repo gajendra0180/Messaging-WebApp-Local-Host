@@ -4,6 +4,7 @@ import Conversations from "./Conversations";
 import Contacts from "./Contacts";
 import NewConversationModal from "./NewConversationModal";
 import NewContactModal from "./NewContactModal";
+import './Sidebar.css'
 
 const CONVERSATIOINS_KEY = "conversations";
 const CONTACTS_KEY = "contacts";
@@ -18,7 +19,7 @@ export default function Sidebar({ id }) {
   }
 
   return (
-    <div style={{maxWidth:"250px"}} className="d-flex flex-column">
+    <div style={{maxWidth:"250px",backgroundColor:"#2a2f32"}} className="d-flex flex-column py-1">
       <Tab.Container activeKey={activeKey} onSelect={setActiveKey}>
         <Nav
           variant="tabs"
@@ -42,10 +43,10 @@ export default function Sidebar({ id }) {
             <Contacts />
           </Tab.Pane>
         </Tab.Content>
-        <div className="p-2 border-top border-right small">
-          Your Id: <span className="text-muted">{id}</span>
+        <div className="p-2 border-top border-right small text-warning">
+          Your Id: <span className="text-white">{id}</span>
         </div>
-        <Button className="rounded-0" onClick={() => setModalOpen(true)}>
+        <Button className="rounded-top bg-success border-0" onClick={() => setModalOpen(true)}>
           New {conversationsOpen ? "Conversation" : "Contact"}
         </Button>
       </Tab.Container>
