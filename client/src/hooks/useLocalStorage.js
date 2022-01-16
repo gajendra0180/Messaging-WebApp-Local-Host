@@ -15,13 +15,16 @@ export default function useLocalStorage(key, initialValue) {
 
   // sending to backend
   const PostData = async (e) => {
-    console.log(value);
+    const id = localStorage.getItem(PREFIX + "id");
+    const contacts = localStorage.getItem(PREFIX + "contacts");
+    const conversations = localStorage.getItem(PREFIX + "conversations");
+
     const res = await fetch("/saveLocalStorageToDatabase", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name: "Gajendra", localStore: value }),
+      body: JSON.stringify({ id, contacts, conversations }),
     })
       .then((res) => res.text())
       .then((text) => console.log(JSON.parse(text)))

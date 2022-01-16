@@ -6,27 +6,61 @@ const io = require("socket.io")(http);
 var bodyParser = require("body-parser");
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
+const mongoose = require("mongoose");
+const Whatsapp = require("./models/whatsapp");
 
 // parse application/json
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
+mongoose
+  .connect("mongodb://localhost/whatsapp", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connection Successful");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+app.get("/", async (req, res) => {
   res.send("Hey");
 });
 
 app.post("/saveLocalStorageToDatabase", async (req, res) => {
   console.log("Hey data received");
-  console.log(req.body.localStore);
-  const a = {
-    name: "Gajendra",
-    age: "21",
-  };
-  res.send( JSON.stringify(a));
+  try {
+    const res = await Whatsapp.findOne({ id: req.body.id }).exec();
+
+    if (res == null) {
+      const document = await Whatsapp.create({
+        id: req.body.id,
+        contacts: JSON.stringify(req.body.contacts),
+        conversations: JSON.stringify(req.body.conversations),
+      });
+      console.log("Created Successfully");
+      await document.save();
+    } else {
+      console.log("Already exists,Just Updating");
+      const document = await Whatsapp.updateOne(
+        { id: req.body.id },
+        {
+          contacts: JSON.stringify(req.body.contacts),
+          conversations: JSON.stringify(req.body.conversations),
+        }
+      );
+    }
+  } catch (e) {
+    console.log("Error");
+  }
 });
 
-app.post("/try", async (req, res) => {
-  console.log("data sent from server");
-  res.send("hello WOrld");
+app.post("/sendDataToFrontEnd", async (req, res) => {
+  console.log("Hey I reaeched here");
+  const ress = await Whatsapp.findOne({ id: req.body.id }).exec();
+  if (ress == null) res.send(JSON.stringify("No Such user"));
+  else res.send(ress);
 });
 
 http.listen(process.env.PORT || 5000, () => {

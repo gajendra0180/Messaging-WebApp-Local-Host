@@ -7,14 +7,29 @@ export default function Login({ onIdSubmit }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     console.log(idRef.current.value);
-    onIdSubmit(idRef.current.value);
+
+    // receiving data  from  backend
+    const GetData = async (e) => {
+      const res = await fetch("/sendDataToFrontEnd", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: idRef.current.value }),
+      })
+        .then((res) => res.text())
+        .then((text) => console.log(JSON.parse(text)))
+        .catch((e) => console.log(e));
+    };
+    console.log("Hey");
+    GetData()
+    // onIdSubmit(idRef.current.value);
   }
   function createNewId() {
     onIdSubmit(uuidV4());
   }
-
-
 
   return (
     <Container
