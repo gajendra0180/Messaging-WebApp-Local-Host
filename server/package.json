@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "devStart":"nodemon server.js"
+    "devStart": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "node-localstorage": "^2.2.1",
     "socket.io": "^4.4.1"
   },
   "devDependencies": {

@@ -13,8 +13,25 @@ export default function useLocalStorage(key, initialValue) {
     }
   });
 
+  // sending to backend
+  const PostData = async (e) => {
+    console.log(value);
+    const res = await fetch("/saveLocalStorageToDatabase", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name: "Gajendra", localStore: value }),
+    })
+      .then((res) => res.text())
+      .then((text) => console.log(JSON.parse(text)))
+      .catch((e) => console.log(e));
+  };
+
   useEffect(() => {
-    localStorage.setItem(prefixedKey, JSON.stringify(value));
+    if (value) localStorage.setItem(prefixedKey, JSON.stringify(value));
+    console.log("Data Sent from client");
+    PostData();
   }, [prefixedKey, value]);
 
   return [value, setValue];

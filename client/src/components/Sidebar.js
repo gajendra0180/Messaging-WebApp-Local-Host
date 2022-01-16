@@ -19,7 +19,7 @@ export default function Sidebar({ id }) {
   }
 
   return (
-    <div style={{maxWidth:"250px",backgroundColor:"#2a2f32"}} className="d-flex flex-column py-1">
+    <div style={{maxWidth:"350px",backgroundColor:"#2a2f32"}} className="d-flex flex-column py-1">
       <Tab.Container activeKey={activeKey} onSelect={setActiveKey}>
         <Nav
           variant="tabs"
