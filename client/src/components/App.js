@@ -6,8 +6,9 @@ import { ContactsProvider } from "../contexts/ContactsProvider";
 import { ConversationsProvider } from "../contexts/ConversationsProvider";
 import { SocketProvider } from "../contexts/SocketProvider";
 
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 function App() {
-  
   const [id, setId] = useLocalStorage("id");
 
   const dashboard = (
@@ -20,6 +21,15 @@ function App() {
     </SocketProvider>
   );
 
-  return id ? dashboard : <Login onIdSubmit={setId} />;
+  return (
+    <Router>
+      <Switch>
+        <Route
+          path="/"
+          component={props=> id ? dashboard : <Login onIdSubmit={setId} {...props} />}
+        />
+      </Switch>
+    </Router>
+  );
 }
 export default App;

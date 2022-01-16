@@ -8,12 +8,10 @@ export default function OpenConversation() {
   const setRef = useCallback((node) => {
     if (node) {
       node.scrollIntoView({ smooth: true });
-      node.focus()
+      node.focus();
     }
   }, []);
   const { sendMessage, selectedConversation } = useConversations();
-
-
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -29,9 +27,17 @@ export default function OpenConversation() {
   return (
     <div className="chat_area">
       <div className="d-flex flex-column flex-grow-1">
-        <div className="d-flex p-2 px-4  text-white" style={{ backgroundColor: "#2a2f32" }}>
-          <div className="rounded-circle mx-3 p-3" style={{ backgroundColor: "white" }}></div>
-          <div className="my-1">{selectedConversation.recipients.map((e) => (e.name)).join(",")}</div>
+        <div
+          className="d-flex p-2 px-4  text-white"
+          style={{ backgroundColor: "#2a2f32" }}
+        >
+          <div
+            className="rounded-circle mx-3 p-3"
+            style={{ backgroundColor: "white" }}
+          ></div>
+          <div className="my-1">
+            {selectedConversation.recipients.map((e) => e.name).join(",")}
+          </div>
         </div>
         <div className="flex-grow-1 overflow-auto">
           <div className="d-flex px-4 flex-column align-items-start justify-content-end px-3">
@@ -42,23 +48,26 @@ export default function OpenConversation() {
                 <div
                   key={index}
                   ref={lastMessage ? setRef : null}
-                  className={`my-1 d-flex flex-column ${message.fromMe
-                    ? "align-self-end align-items-end"
-                    : "align-items-start"
-                    }`}
+                  className={`my-1 d-flex flex-column ${
+                    message.fromMe
+                      ? "align-self-end align-items-end"
+                      : "align-items-start"
+                  }`}
                 >
                   <div
                     className="rounded px-2 py-1 rounded"
                     style={{
-                      backgroundColor: `${message.fromMe ? "#dcf8c6" : "white"
-                        }`,
+                      backgroundColor: `${
+                        message.fromMe ? "#dcf8c6" : "white"
+                      }`,
                     }}
                   >
                     {message.text}
                   </div>
                   <div
-                    className={`text-muted small ${message.fromMe ? "text-right" : ""
-                      }`}
+                    className={`text-muted small ${
+                      message.fromMe ? "text-right" : ""
+                    }`}
                   >
                     {message.fromMe ? "You" : message.senderName}
                   </div>
@@ -68,10 +77,7 @@ export default function OpenConversation() {
           </div>
         </div>
         <Form onSubmit={handleSubmit}>
-          <Form.Group
-            className="p-2"
-            style={{ backgroundColor: "#ddd8d8" }}
-          >
+          <Form.Group className="p-2" style={{ backgroundColor: "#ddd8d8" }}>
             <InputGroup>
               <Form.Control
                 as="textarea"
@@ -87,7 +93,9 @@ export default function OpenConversation() {
                   border: "1px solid #fff",
                 }}
               />
-              <Button className="bg-success mx-2 rounded-top" type="submit">Send</Button>
+              <Button className="bg-success mx-2 rounded-top" type="submit">
+                Send
+              </Button>
             </InputGroup>
           </Form.Group>
         </Form>
