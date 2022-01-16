@@ -1,29 +1,39 @@
 .list-group-item.active {
-  background-color: #5e686b !important;
+  background-color: #ffffff8f !important;
 }
 .list-group-item {
-  background-color: #323739 !important;
-  height: 7vh !important;
+  background-color: #ffffff00 !important;
+  /* height: 7vh !important; */
   color: white !important;
-  border-bottom: 1px solid grey !important;
-  border-top: 1px solid grey !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.433) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.433) !important;
 }
 .list-group-item:hover {
-  background-color: #5e686b !important;
+  background-color: #ffffff80 !important;
   color: white !important;
 }
 
 .nav-link {
-  background-color: #323739 !important;
+  background-color: #ffffff00 !important;
   color: white !important;
   border: 1px solid transparent !important;
-  border-color: #dee2e6 #dee2e6 #fff !important;
+  border-color: #dee2e672 #dee2e680 rgba(255, 255, 255, 0.433) !important;
 }
 
 .nav-tabs:hover {
-  background-color: #5e686b !important;
+  background-color: #ffffff79 !important;
 }
 .nav-link.active {
   color: white !important;
-  background-color: #5e686b !important;
+  background-color: #ffffff8a !important;
+}
+
+.sidebar_background {
+  display: flex;
+  flex-direction: column;
+  max-width: 25vw;
+  padding-top: 1vh;
+  opacity: 0.98;
+  background-image: url(https://www.wallpaperuse.com/wallp/5-55370_m.jpg);
+  background-size: cover;
 }

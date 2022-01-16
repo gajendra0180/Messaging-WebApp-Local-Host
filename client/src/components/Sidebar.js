@@ -19,13 +19,10 @@ export default function Sidebar({ id }) {
   }
 
   return (
-    <div
-      style={{ maxWidth: "350px", backgroundColor: "#2a2f32" }}
-      className="d-flex flex-column py-1"
-    >
+    <div className="sidebar_background">
       <Tab.Container activeKey={activeKey} onSelect={setActiveKey}>
         <Nav
-          variant="tabs"
+          // variant="tabs"
           className="justify-content-center"
           style={{ cursor: "pointer" }}
         >
@@ -46,11 +43,12 @@ export default function Sidebar({ id }) {
             <Contacts />
           </Tab.Pane>
         </Tab.Content>
-        <div className="p-2 border-top border-right small text-warning">
+        <div className="p-2 border-top border-right small">
           Your Id: <span className="text-white">{id}</span>
         </div>
         <Button
-          className="rounded-top bg-success border-0"
+          className="rounded-top  border-0"
+          variant="danger"
           onClick={() => setModalOpen(true)}
         >
           New {conversationsOpen ? "Conversation" : "Contact"}

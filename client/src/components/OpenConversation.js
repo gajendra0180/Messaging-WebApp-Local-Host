@@ -27,19 +27,17 @@ export default function OpenConversation() {
   return (
     <div className="chat_area">
       <div className="d-flex flex-column flex-grow-1">
-        <div
-          className="d-flex p-2 px-4  text-white"
-          style={{ backgroundColor: "#2a2f32" }}
-        >
-          <div
-            className="rounded-circle mx-3 p-3"
-            style={{ backgroundColor: "white" }}
-          ></div>
-          <div className="my-1">
-            {selectedConversation.recipients.map((e) => e.name).join(",")}
-          </div>
+        <div className="chat_Panel_Nav">
+          <img
+            height="30px"
+            width="30px"
+            style={{ borderRadius: "20px", marginRight: "2vw" }}
+            src="https://media.istockphoto.com/vectors/user-vector-icon-on-transparent-background-user-icon-vector-id1013501908"
+            alt=""
+          />
+          {selectedConversation.recipients.map((e) => e.name).join(",")}
         </div>
-        <div className="flex-grow-1 overflow-auto">
+        <div className="flex-grow-1 overflow-auto my-2">
           <div className="d-flex px-4 flex-column align-items-start justify-content-end px-3">
             {selectedConversation.messages.map((message, index) => {
               const lastMessage =
@@ -93,7 +91,7 @@ export default function OpenConversation() {
                   border: "1px solid #fff",
                 }}
               />
-              <Button className="bg-success mx-2 rounded-top" type="submit">
+              <Button className="mx-2 rounded-top" variant="danger" type="submit">
                 Send
               </Button>
             </InputGroup>
