@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { v4 as uuidV4 } from "uuid";
 
-const PREFIX = "whatsapp-clone-";
+const PREFIX = "chatapp-clone-";
 export default function Login({ onIdSubmit }) {
   const idRef = useRef();
 

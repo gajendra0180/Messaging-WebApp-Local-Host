@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const whatsappSchema = new mongoose.Schema({
+const ChatappSchema = new mongoose.Schema({
   id: {
     type: String,
     required: true,
@@ -15,4 +15,4 @@ const whatsappSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Whatsapp", whatsappSchema);
+module.exports = mongoose.model("ChatApp", ChatappSchema);

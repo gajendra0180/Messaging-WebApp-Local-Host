@@ -7,16 +7,30 @@ var bodyParser = require("body-parser");
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 const mongoose = require("mongoose");
-const Whatsapp = require("./models/whatsapp");
 
+const dotenv = require("dotenv");
+const ChatApp = require("./models/chatApp");
+
+dotenv.config({ path: "./config.env" });
 // parse application/json
 app.use(bodyParser.json());
 
+const DB = process.env.DATABASE;
+
+// mongoose
+//   .connect("mongodb://localhost/whatsapp", {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => {
+//     console.log("Connection Successful");
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
 mongoose
-  .connect("mongodb://localhost/whatsapp", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(DB)
   .then(() => {
     console.log("Connection Successful");
   })
@@ -31,10 +45,10 @@ app.get("/", async (req, res) => {
 app.post("/saveLocalStorageToDatabase", async (req, res) => {
   console.log("Hey data received");
   try {
-    const res = await Whatsapp.findOne({ id: req.body.id }).exec();
+    const res = await ChatApp.findOne({ id: req.body.id }).exec();
 
     if (res == null) {
-      const document = await Whatsapp.create({
+      const document = await ChatApp.create({
         id: req.body.id,
         contacts: JSON.stringify(req.body.contacts),
         conversations: JSON.stringify(req.body.conversations),
@@ -43,7 +57,7 @@ app.post("/saveLocalStorageToDatabase", async (req, res) => {
       await document.save();
     } else {
       console.log("Already exists,Just Updating");
-      const document = await Whatsapp.updateOne(
+      const document = await ChatApp.updateOne(
         { id: req.body.id },
         {
           contacts: JSON.stringify(req.body.contacts),
@@ -57,8 +71,8 @@ app.post("/saveLocalStorageToDatabase", async (req, res) => {
 });
 
 app.post("/sendDataToFrontEnd", async (req, res) => {
-  console.log("Hey I reaeched here",req.body.id);
-  const ress = await Whatsapp.findOne({ id: req.body.id }).exec();
+  console.log("Hey I reaeched here", req.body.id);
+  const ress = await ChatApp.findOne({ id: req.body.id }).exec();
   if (ress == null) res.send(JSON.stringify("No Such user"));
   else res.send(ress);
 });
