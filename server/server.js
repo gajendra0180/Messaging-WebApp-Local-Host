@@ -57,7 +57,7 @@ app.post("/saveLocalStorageToDatabase", async (req, res) => {
 });
 
 app.post("/sendDataToFrontEnd", async (req, res) => {
-  console.log("Hey I reaeched here");
+  console.log("Hey I reaeched here",req.body.id);
   const ress = await Whatsapp.findOne({ id: req.body.id }).exec();
   if (ress == null) res.send(JSON.stringify("No Such user"));
   else res.send(ress);

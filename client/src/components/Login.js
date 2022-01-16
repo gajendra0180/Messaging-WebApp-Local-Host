@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { v4 as uuidV4 } from "uuid";
 
+const PREFIX = "whatsapp-clone-";
 export default function Login({ onIdSubmit }) {
   const idRef = useRef();
 
@@ -17,15 +18,41 @@ export default function Login({ onIdSubmit }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id: idRef.current.value }),
+        body: JSON.stringify({ id: JSON.stringify(idRef.current.value) }),
       })
         .then((res) => res.text())
-        .then((text) => console.log(JSON.parse(text)))
+        .then((text) => {
+          console.log(JSON.parse(text));
+          if (JSON.parse(text) == "No Such user") {
+            //  alert("No Such user exists in our database")
+            console.log("No such user");
+          } else {
+            localStorage.setItem(
+              PREFIX + "contacts",
+              JSON.stringify(JSON.parse(JSON.parse(JSON.parse(text).contacts)))
+            );
+            localStorage.setItem(
+              PREFIX + "conversations",
+              JSON.stringify(
+                JSON.parse(JSON.parse(JSON.parse(text).conversations))
+              )
+            );
+            localStorage.setItem(
+              PREFIX + "id",
+              JSON.stringify(JSON.parse(JSON.parse(text).id))
+            );
+            onIdSubmit(idRef.current.value);
+            console.log("Data recieved", JSON.parse(JSON.parse(text).id));
+            console.log("Data recieved", JSON.parse(JSON.parse(text).contacts));
+            console.log(
+              "Data recieved",
+              JSON.parse(JSON.parse(text).conversations)
+            );
+          }
+        })
         .catch((e) => console.log(e));
     };
-    console.log("Hey");
-    GetData()
-    // onIdSubmit(idRef.current.value);
+    GetData();
   }
   function createNewId() {
     onIdSubmit(uuidV4());
