@@ -2,13 +2,13 @@ import React from "react";
 import { useConversations } from "../contexts/ConversationsProvider";
 import Sidebar from "./Sidebar";
 import OpenConversation from "./OpenConversation";
-import './Dashboard.css'
+import "./Dashboard.css";
 
 export default function Dashboard({ id }) {
   const { selectedConversation } = useConversations();
 
   return (
-    <div className="dashboard" style={{ height: "100vh" }}>
+    <div className="dashboard" style={{ height: "125vh" }}>
       <Sidebar id={id} />
       {selectedConversation && <OpenConversation />}
     </div>

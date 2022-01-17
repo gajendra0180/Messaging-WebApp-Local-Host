@@ -14,13 +14,9 @@
   color: rgba(4, 0, 0, 0.46);
   font-size: 20px;
   opacity: 1;
-  background-color: rgba(255, 255, 255, 0.583);
+  background-color: rgba(255, 255, 255, 0.755);
   /* background-image: url(https://wallpaperboat.com/wp-content/uploads/2020/06/26/49250/gradient-24.jpg); */
   background-position: center center;
   transition: 0.5s;
   cursor: pointer;
-}
-.chat_Panel_Nav:hover{
-  background-color: rgba(255, 255, 255, 0.651);
-
 }

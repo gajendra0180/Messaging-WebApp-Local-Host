@@ -6,9 +6,9 @@ export default function Contacts() {
   const { contacts } = useContacts();
 
   return (
-    <div className="d-flex flex-wrap">
+    <div className="d-flex flex-wrap text-capitalize">
       <div
-        className="bg-transparent p-2 mx-2 rounded"
+        className="bg-transparent d-flex flex-wrap  p-2 mx-2 rounded"
         style={{
           wordBreak: "break-word",
           marginBottom: "2vh",
@@ -21,7 +21,11 @@ export default function Contacts() {
         move to conversations Panel and select any <br />
         contact to start conversation. ]
       </div>
-      <ListGroup variant="flush" style={{ width: "100vw" }}>
+      <ListGroup
+        variant="flush"
+        className="text-capitalize d-flex flex-wrap flex-column"
+        style={{ width: "100vw",overflow:"scroll" }}
+      >
         {contacts.map((contact, index) => (
           <ListGroup.Item key={contact.id}>
             <img

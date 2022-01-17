@@ -19,7 +19,7 @@ export default function Sidebar({ id }) {
   }
 
   return (
-    <div className="sidebar_background">
+    <div className="sidebar_background d-flex">
       <Tab.Container activeKey={activeKey} onSelect={setActiveKey}>
         <Nav
           // variant="tabs"
@@ -33,7 +33,10 @@ export default function Sidebar({ id }) {
             <Nav.Link eventKey={CONTACTS_KEY}>Contacts</Nav.Link>
           </Nav.Item>
         </Nav>
-        <Tab.Content className="border-right-0 d-flex overflow-hidden flex-grow-1">
+        <Tab.Content
+          className="border-right-0 d-flex flex-grow-1"
+          style={{ overflowX: "hidden", overflowY: "visible" }}
+        >
           <Tab.Pane eventKey={CONVERSATIOINS_KEY}>
             <div style={{ marginTop: "2vh" }}></div>
             <Conversations />

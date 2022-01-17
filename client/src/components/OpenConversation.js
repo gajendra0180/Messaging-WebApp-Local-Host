@@ -26,8 +26,8 @@ export default function OpenConversation() {
   // ededed
   return (
     <div className="chat_area">
-      <div className="d-flex flex-column flex-grow-1">
-        <div className="chat_Panel_Nav">
+      <div className="d-flex flex-column flex-grow-1 ">
+        <div className="chat_Panel_Nav text-capitalize">
           <img
             height="30px"
             width="30px"
@@ -51,6 +51,7 @@ export default function OpenConversation() {
                       ? "align-self-end align-items-end"
                       : "align-items-start"
                   }`}
+                  style={{ maxWidth: "60vw", wordBreak: "break-word" }}
                 >
                   <div
                     className="rounded px-2 py-1 rounded"
@@ -63,7 +64,7 @@ export default function OpenConversation() {
                     {message.text}
                   </div>
                   <div
-                    className={`text-muted small ${
+                    className={`text-white text-capitalize small ${
                       message.fromMe ? "text-right" : ""
                     }`}
                   >
@@ -78,20 +79,24 @@ export default function OpenConversation() {
           <Form.Group className="p-2" style={{ backgroundColor: "#ddd8d8" }}>
             <InputGroup>
               <Form.Control
-                as="textarea"
+                // as="text"
                 placeholder="Type a message"
                 required
                 value={text}
                 autofocus="autofocus"
                 onChange={(e) => setText(e.target.value)}
                 style={{
-                  height: "30px",
+                  height: "40px",
                   resize: "none",
                   borderRadius: "20px",
                   border: "1px solid #fff",
                 }}
               />
-              <Button className="mx-2 rounded-top" variant="danger" type="submit">
+              <Button
+                className="mx-2 rounded-top"
+                variant="danger"
+                type="submit"
+              >
                 Send
               </Button>
             </InputGroup>

@@ -6,7 +6,7 @@ export default function Conversations() {
   const { conversations, selectConversationIndex } = useConversations();
 
   return (
-    <div className="d-flex flex-wrap">
+    <div className="d-flex flex-wrap text-capitalize">
       <div
         className=" bg-transparent p-2 mx-2 rounded"
         style={{
@@ -31,9 +31,15 @@ export default function Conversations() {
             onClick={() => selectConversationIndex(index)}
             active={conversation.selected}
           >
-            <div className="d-flex flex-wrap" >
-              <img height="30px" width="30px" style={{ borderRadius: "20px", marginRight: "1vw" }} src="https://media.istockphoto.com/vectors/user-vector-icon-on-transparent-background-user-icon-vector-id1013501908" alt="" />
-              <div style={{ wordBreak: "break-word", width: "22vw" }} >
+            <div className="d-flex flex-wrap text-capitalize">
+              <img
+                height="30px"
+                width="30px"
+                style={{ borderRadius: "20px", marginRight: "1vw" }}
+                src="https://media.istockphoto.com/vectors/user-vector-icon-on-transparent-background-user-icon-vector-id1013501908"
+                alt=""
+              />
+              <div style={{ wordBreak: "break-word", width: "22vw" }}>
                 {conversation.recipients.map((r) => r.name).join(", ")}
               </div>
             </div>
